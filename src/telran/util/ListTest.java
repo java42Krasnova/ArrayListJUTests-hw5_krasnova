@@ -39,6 +39,7 @@ String initialStrings[] = {"name1", "name2"};
 	@Test
 	void testAdd()
 	{
+		//[YG] the tests only for return and size, but no test for real adding a given element at a given index
 		//Integer expInt[] = {10,20,30,40};
 		//adds element in position to array
 		assertTrue(numbers.add(2, 30));
@@ -48,6 +49,7 @@ String initialStrings[] = {"name1", "name2"};
 		//adds new element in first  position to array
 		assertTrue(strings.add(0, "newElement"));
 		assertEquals(3, strings.size());// checks the size of new array
+		//[YG] the following your comment about the position is incorrect is incorrect
 		//adds new element in position size+1  position to array
 		assertTrue(strings.add(3,"test2"));
 		assertEquals(4, strings.size());//checks the allocate
