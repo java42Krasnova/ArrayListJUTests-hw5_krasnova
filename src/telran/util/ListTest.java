@@ -15,9 +15,8 @@ String initialStrings[] = {"name1", "name2"};
 	void setUp() throws Exception {
 		numbers = getInitialNumbers();
 		strings = getInitialStrings ();
-	
 	}
-
+	
 	private List<String> getInitialStrings() {
 		List<String> res = new ArrayList<>();
 		for(int i=0; i<initialStrings.length;i++)
@@ -61,7 +60,8 @@ String initialStrings[] = {"name1", "name2"};
 	void testGetSize()
 	{
 		assertEquals(3, numbers.size());
-		numbers.add(3,4);
+		numbers.add(3, 45);
+		System.out.println(numbers.get(2));
 		assertEquals(4,numbers.size());
 	}
 	@Test
