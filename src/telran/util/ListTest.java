@@ -58,7 +58,7 @@ class ListTest {
 		assertEquals(false, numbers.add(7, 1000));
 		assertEquals(false, numbers.add(-1, 1000));
 	}
-
+	
 	@Test
 	void testRemove() {
 		Integer expected0[] = { 20, 40 };
@@ -187,7 +187,9 @@ class ListTest {
 		strings.add("name3");
 		// "name1","name2","name1","name1","name3"
 		Predicate<String> predStr1 = new StartWithPredicate("name1");
+		Predicate<String> predStr2 = new StartWithPredicate("name4");
 		assertEquals(3, strings.lastIndexOf(predStr1));
+		assertEquals(-1, strings.lastIndexOf(predStr2));
 	}
 
 	@Test
@@ -203,6 +205,9 @@ class ListTest {
 		String arrExp[] = { "name1", "name1", "name1", "name3" };
 		assertArrayEquals(arrExp, getArrayFromList(strings));
 		assertEquals(-1, strings.indexOf(predStr1));
+		assertFalse(strings.removeIf(predStr1));
+		assertNull(strings.get(5));
+		
 	}
 
 }
