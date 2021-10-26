@@ -207,6 +207,9 @@ class ListTest {
 		assertEquals(-1, strings.indexOf(predStr1));
 		assertFalse(strings.removeIf(predStr1));
 		assertNull(strings.get(5));
+		//[YG] test for reproducing the bug 
+		// assertTrue(strings.removeIf(new StartWithPredicate("name")));
+		// assertArrayEquals(new Integer[0],getArrayFromList(strings)); 
 		
 	}
 
