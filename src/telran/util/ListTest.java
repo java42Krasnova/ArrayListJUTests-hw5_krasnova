@@ -89,6 +89,7 @@ class ListTest {
 		for (int i = 0; i < size; i++) {
 			res[i] = list.get(i);
 		}
+		
 		return res;
 	}
 
@@ -200,6 +201,7 @@ class ListTest {
 		strings.add("name3");
 		strings.add("name2");
 		// "name1","name2","name1","name1","name3","name2"
+
 		Predicate<String> predStr1 = new StartWithPredicate("name2");
 		assertTrue(strings.removeIf(predStr1));
 		String arrExp[] = { "name1", "name1", "name1", "name3" };
@@ -207,9 +209,8 @@ class ListTest {
 		assertEquals(-1, strings.indexOf(predStr1));
 		assertFalse(strings.removeIf(predStr1));
 		assertNull(strings.get(5));
-		//[YG] test for reproducing the bug 
-		// assertTrue(strings.removeIf(new StartWithPredicate("name")));
-		// assertArrayEquals(new Integer[0],getArrayFromList(strings)); 
+		 assertTrue(strings.removeIf(new StartWithPredicate("name")));
+		assertArrayEquals(new Integer[0],getArrayFromList(strings)); 
 		
 	}
 
