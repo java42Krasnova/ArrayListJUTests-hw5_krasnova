@@ -246,5 +246,49 @@ class ListTest {
 		assertArrayEquals(new Integer[0],getArrayFromList(strings)); 
 		
 	}
+	
+	
+	@Test
+	void removeAllTest()
+	{
+		numbers.add(20);
+		List<Integer> otherNumbers = new ArrayList<>();
+		otherNumbers.add(20);
+		otherNumbers.add(40);
+		assertTrue(numbers.removeAll(otherNumbers));
+		Integer exp[] = {10};
+		assertArrayEquals(exp, getArrayFromList(numbers));
+		assertFalse(numbers.removeAll(otherNumbers));
+		
+	}
+	
+	@Test
+	void removeAllSame()
+	{
+		assertTrue(numbers.removeAll(numbers));
+		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
+	}
+	@Test
+	void testRemovePattern() 
+	{
+		Integer exp[] = {10,40};
+		Integer removeElem = 20;//bug?
+		numbers.remove(removeElem);
+		assertArrayEquals(exp,getArrayFromList(numbers));		
+}
+	
+	@Test
+	void testRetainAll()
+	{
+		List<String> listToRetail = new ArrayList();
+		strings.add("name1");
+		strings.add("name1");
+		strings.add("name3");
+		// "name1","name2","name1","name1","name3"
+		listToRetail.add("name1");
+		strings.retainAll(listToRetail);
+		String exp[] = {"name1", "name1","name1"};
+		assertArrayEquals(exp, getArrayFromList(strings));
+	}
 
 }
