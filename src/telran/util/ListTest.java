@@ -2,6 +2,7 @@ package telran.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class ListTest {
 
 	private List<Integer> getInitialNumbers() {
 
-		List<Integer> res = new ArrayList<>(1);
+		List<Integer> res = new ArrayList<>();
 		for (int i = 0; i < initialNumbers.length; i++) {
 			res.add(initialNumbers[i]);
 		}
@@ -291,4 +292,44 @@ class ListTest {
 		assertArrayEquals(exp, getArrayFromList(strings));
 	}
 
+	@Test 
+	void testArraySortComparator()
+	{
+		List<Integer> arr = new ArrayList<>();
+		arr.add(20);
+		arr.add(10);
+		arr.add(40);
+		arr.sort(new ComparatorBeckw());
+		Integer exp[] = {40, 20,10};
+		for(int i =0; i<arr.size(); i++)
+		assertArrayEquals(exp, getArrayFromList(arr));
+		List<String> arrStr = new ArrayList<>();
+		arrStr.add("x");
+		arrStr.add("y");
+		arrStr.add("z");
+		arrStr.add("a");
+		arrStr.sort(new ComparatorBeckwStr());
+		String expStr [] = {"z","y","x","a"};
+		assertArrayEquals(expStr, getArrayFromList(arrStr));
+		
+	}
+	@Test 
+	void testArraySortNatural()
+	{
+		List<Integer> arr = new ArrayList<>();
+		arr.add(70);
+		arr.add(10);
+		arr.add(20);
+		arr.add(9);
+		arr.sort();
+		Integer exp[] = {9, 10, 20, 70};
+		assertArrayEquals(exp, getArrayFromList(arr));
+		List<String> arrStr = new ArrayList<>();
+		arrStr.add("z");
+		arrStr.add("y");
+		arrStr.add("x");
+		arrStr.sort();
+		String expStr [] = {"x","y","z"};
+		assertArrayEquals(expStr, getArrayFromList(arrStr));
+	}
 }
