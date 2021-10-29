@@ -32,7 +32,7 @@ class ListTest {
 
 	private List<Integer> getInitialNumbers() {
 
-		List<Integer> res = new ArrayList<>();
+		List<Integer> res = new ArrayList<>(3);
 		for (int i = 0; i < initialNumbers.length; i++) {
 			res.add(initialNumbers[i]);
 		}
@@ -60,23 +60,21 @@ class ListTest {
 		assertFalse(strings.add(-2, "test"));
 		assertFalse(numbers.add(6, 6));
 	}
-	
+
 	@Test 
 	void testGetSize()
 	{
 		assertEquals(3, numbers.size());
 		numbers.add(3, 45);
-		System.out.println(numbers.get(2));
 		assertEquals(4,numbers.size());
 	}
 	@Test
-
+	
 	void testGet() {
 		assertEquals(10, numbers.get(0));
 		assertEquals("name1", strings.get(0));
 		assertEquals(null, numbers.get(-1));
 		assertEquals(null, numbers.get(3));
-
 	}
 
 	@Test
@@ -281,17 +279,18 @@ class ListTest {
 	@Test
 	void testRetainAll()
 	{
-		List<String> listToRetail = new ArrayList();
+		List<String> listToRetail = new ArrayList<>();
 		strings.add("name1");
 		strings.add("name1");
 		strings.add("name3");
 		// "name1","name2","name1","name1","name3"
 		listToRetail.add("name1");
+		listToRetail.add("name2");
 		strings.retainAll(listToRetail);
-		String exp[] = {"name1", "name1","name1"};
+		String exp[] = {"name1","name2", "name1","name1"};
 		assertArrayEquals(exp, getArrayFromList(strings));
 	}
-
+	
 	@Test 
 	void testArraySortComparator()
 	{
@@ -301,7 +300,6 @@ class ListTest {
 		arr.add(40);
 		arr.sort(new ComparatorBeckw());
 		Integer exp[] = {40, 20,10};
-		for(int i =0; i<arr.size(); i++)
 		assertArrayEquals(exp, getArrayFromList(arr));
 		List<String> arrStr = new ArrayList<>();
 		arrStr.add("x");
