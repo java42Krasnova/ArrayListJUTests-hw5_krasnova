@@ -7,7 +7,8 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/array-list"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/list-inteface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/array-list"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/linked-list"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
