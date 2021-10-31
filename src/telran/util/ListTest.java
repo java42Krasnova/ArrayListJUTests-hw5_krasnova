@@ -74,7 +74,6 @@ String initialStrings[] = {"name1", "name2"};
 		assertArrayEquals(expected0, getArrayFromList(numbers));
 		assertEquals(40, numbers.remove(1));
 		assertArrayEquals(expected1, getArrayFromList(numbers));
-		
 	}
 	@Test 
 	void testSize() {
@@ -143,7 +142,6 @@ String initialStrings[] = {"name1", "name2"};
 		}
 		return res;
 	}
-	
 	@Test
 	void indexOfTest() {
 		assertEquals(0, numbers.indexOf(10));
@@ -159,6 +157,7 @@ String initialStrings[] = {"name1", "name2"};
 		assertEquals(3, numbers.lastIndexOf(10));
 		
 	}
+	
 	@Test
 	void indexOfPredicate() {
 		assertEquals(2, numbers.indexOf(new GreaterNumberPredicate(25)));
