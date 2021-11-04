@@ -29,7 +29,7 @@ String initialStrings[] = {"name1", "name2"};
 		}
 		return res;
 	}
-
+	
 	private List<Integer> getInitialNumbers() {
 		
 		List<Integer> res = new ArrayList<>(1);
