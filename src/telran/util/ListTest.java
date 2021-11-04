@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ListTest {
+private static final int N_NUMBERS_PERFORMANCE = 1000000;
 private List<Integer> numbers;
 private List<String> strings;
 Integer initialNumbers[] = {10, 20, 40};
@@ -21,8 +22,8 @@ String initialStrings[] = {"name1", "name2"};
 	}
 
 	private List<String> getInitialStrings() {
-		//List<String> res = new ArrayList<>();
-		List<String> res = new LinkedList<>();
+		List<String> res = new ArrayList<>();
+		//List<String> res = new LinkedList<>();
 		for (int i = 0; i < initialStrings.length; i++) {
 			res.add(initialStrings[i]);
 		}
@@ -31,14 +32,38 @@ String initialStrings[] = {"name1", "name2"};
 
 	private List<Integer> getInitialNumbers() {
 		
-		//List<Integer> res = new ArrayList<>(1);
-		List<Integer> res = new LinkedList<>();
+		List<Integer> res = new ArrayList<>(1);
+		//List<Integer> res = new LinkedList<>();
 		for (int i = 0; i < initialNumbers.length; i++) {
 			res.add(initialNumbers[i]);
 		}
 		return res;
 	}
+	@Test
+	void clearListTest()
+	{
+		Integer exp[] = {};
+		numbers.clear();
+		assertEquals(0, numbers.size());
+		assertNull(numbers.get(0));
+		assertArrayEquals(exp,getArrayFromList(numbers));
+		numbers.clear();
+	}
+	@Test
+	void sortedSearchExist() {
+		assertEquals(0, numbers.sortedSearch(10));
+		assertEquals(1, numbers.sortedSearch(20));
+		assertEquals(2, numbers.sortedSearch(40));
+	}
+	@Test
+	void sortedSearchNotExist() {
+		assertEquals(-1, numbers.sortedSearch(5));
+		assertEquals(-2, numbers.sortedSearch(15));
+		assertEquals(-3, numbers.sortedSearch(25));
+		assertEquals(-4, numbers.sortedSearch(45));
 
+
+	}
 	@Test
 	void testGet() {
 		assertEquals(10, numbers.get(0));
@@ -46,7 +71,6 @@ String initialStrings[] = {"name1", "name2"};
 		assertNull(numbers.get(-1));
 		assertNull(numbers.get(3));
 		
-
 
 	}
 	@Test
@@ -174,14 +198,13 @@ String initialStrings[] = {"name1", "name2"};
 	void removeIfTest() {
 		Integer expected[] = {10, 20};
 		Integer expectedEmpty[] = {};
+		
 		Predicate<Integer> greater25 = new GreaterNumberPredicate(25);
 		assertTrue(numbers.removeIf(greater25));
 		assertFalse(numbers.removeIf(greater25));
 		assertArrayEquals(expected, getArrayFromList(numbers));
 		assertTrue(numbers.removeIf(new GreaterNumberPredicate(0)));
 		assertArrayEquals(expectedEmpty, getArrayFromList(numbers));
-		
-		
 		
 	}
 	@Test
@@ -246,5 +269,20 @@ String initialStrings[] = {"name1", "name2"};
 		numbers.sort(new ProximityNumberComparator(23));
 		assertArrayEquals(expectedProximity23, getArrayFromList(numbers));
 	}
+	 @Test
+	 void removeIfPerformanceTest()
+	 {
+	//List<Integer> list = new LinkedList<>();
+	List<Integer> list = new ArrayList<>();
+	fillListPerformance(list);
+	Predicate<Integer> divider4Predicate = new Devider$Predicate();
+	list.removeIf(divider4Predicate);
 
+	 }
+
+	private void fillListPerformance(List<Integer> list) {
+for(int i =0; i< N_NUMBERS_PERFORMANCE; i++) {
+	list.add((int)(Math.random() * Integer.MAX_VALUE));
+}
+	}
 }
