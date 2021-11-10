@@ -320,7 +320,11 @@ class ListTest<T> {
 				}
 		}
 		assertArrayEquals(exp2, getArrayFromList(numbers));
-		numbIterator = numbers.iterator();
+	}
+		@Test
+	 void removeAllIteratorTest()
+	{
+		Iterator<Integer>numbIterator = numbers.iterator();
 		while(numbIterator.hasNext())
 		{	
 			System.out.println(numbIterator.next());
@@ -328,7 +332,7 @@ class ListTest<T> {
 		}
 		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
 	}
-
+	
 	private void fillListPerformance(List<Integer> list) {
 		for (int i = 0; i < N_NUMBERS_PERFORMANCE; i++) {
 			list.add((int) (Math.random() * Integer.MAX_VALUE));
