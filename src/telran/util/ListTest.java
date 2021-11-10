@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.function.Predicate;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ListTest<T> {
+	static int numForCheck;
+	static String strForCheck;
 	private static final int N_NUMBERS_PERFORMANCE = 100;
 	private List<Integer> numbers;
 	private List<String> strings;
@@ -23,8 +23,8 @@ class ListTest<T> {
 	}
 
 	private List<String> getInitialStrings() {
-	//	List<String> res = new ArrayList<>();
-		List<String> res = new LinkedList<>();
+		 List<String> res = new ArrayList<>();
+		//List<String> res = new LinkedList<>();
 		for (int i = 0; i < initialStrings.length; i++) {
 			res.add(initialStrings[i]);
 		}
@@ -33,8 +33,8 @@ class ListTest<T> {
 
 	private List<Integer> getInitialNumbers() {
 
-//	List<Integer> res = new ArrayList<>(1);
-	List<Integer> res = new LinkedList<>();
+		List<Integer> res = new ArrayList<>(1);
+		//List<Integer> res = new LinkedList<>();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
@@ -146,19 +146,23 @@ class ListTest<T> {
 
 	@Test
 	void containsPredicateNumbersTest() {
-		Predicate<Integer> predicate100 = null; /*TODO rewrite code without any predicate class*/ 
-		Predicate<Integer> predicate25 = null; /*TODO rewrite code without any predicate class*/ 
-		assertFalse(numbers.contains(predicate100));
-		assertTrue(numbers.contains(predicate25));
+	// TODO
+	// DONE
+		numForCheck = 100;
+		assertFalse(numbers.contains(el -> el > numForCheck));
+		numForCheck = 25;
+		assertTrue(numbers.contains(el -> el > numForCheck));
 
 	}
 
 	@Test
+	// TODO
+	// Done
 	void containsPredicateStringsTest() {
-		Predicate<String> predicateName = null; /*TODO rewrite code without any predicate class*/ 
-		Predicate<String> predicateMain = null; /*TODO rewrite code without any predicate class*/ 
-		assertFalse(strings.contains(predicateMain));
-		assertTrue(strings.contains(predicateName));
+		strForCheck = "main";
+		assertFalse(strings.contains(str -> str.contains(strForCheck)));
+		strForCheck = "name";
+		assertTrue(strings.contains(str -> str.contains(strForCheck)));
 
 	}
 
@@ -192,30 +196,41 @@ class ListTest<T> {
 	}
 
 	@Test
-	void indexOfPredicate() {//TODO
-//		assertEquals(2, numbers.indexOf(new GreaterNumberPredicate(25)));/*TODO rewrite code without any predicate class*/ 
-//		assertEquals(0, numbers.indexOf(new GreaterNumberPredicate(5)));/*TODO rewrite code without any predicate class*/ 
-//		assertEquals(-1, numbers.indexOf(new GreaterNumberPredicate(45)));/*TODO rewrite code without any predicate class*/ 
+	void indexOfPredicate() {
+		// TODO
+		// DONE
+		numForCheck = 25;
+		assertEquals(2, numbers.indexOf(el -> el > numForCheck));
+		numForCheck = 5;
+		assertEquals(0, numbers.indexOf(el -> el > numForCheck));
+		numForCheck = 45;
+		assertEquals(-1, numbers.indexOf(el -> el > numForCheck));
 	}
 
 	@Test
 	void lastIndexOfPredicate() {
-		/*TODO rewrite code without any predicate class*/ 
-//		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(25)));
-//		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(5)));
-//		assertEquals(-1, numbers.lastIndexOf(new GreaterNumberPredicate(45)));
+		//TODO
+		//DONE
+		numForCheck = 25;
+		assertEquals(2, numbers.lastIndexOf(el -> el > numForCheck));
+		numForCheck = 5;
+		assertEquals(2, numbers.lastIndexOf(el -> el > numForCheck));
+		numForCheck = 45;
+		assertEquals(-1, numbers.lastIndexOf(el -> el > numForCheck));
 	}
 
 	@Test
 	void removeIfTest() {
+		//TODO
+		//Done
 		Integer expected[] = { 10, 20 };
 		Integer expectedEmpty[] = {};
-
-		Predicate<Integer> greater25 = null; /*TODO rewrite code without any predicate class*/ 
-		assertTrue(numbers.removeIf(greater25));
-		assertFalse(numbers.removeIf(greater25));
+		numForCheck = 25; 
+		assertTrue(numbers.removeIf(el -> el > numForCheck));
+		assertFalse(numbers.removeIf(el -> el > numForCheck));
 		assertArrayEquals(expected, getArrayFromList(numbers));
-		//assertTrue(numbers.removeIf(new GreaterNumberPredicate(0)));/*TODO 0 rewrite code without any predicate class*/ 
+		numForCheck = 0;
+		assertTrue(numbers.removeIf(el -> el > numForCheck));
 		assertArrayEquals(expectedEmpty, getArrayFromList(numbers));
 
 	}
@@ -279,27 +294,31 @@ class ListTest<T> {
 
 	@Test
 	void sortComparatorTest() {
+		//TODO
+		//Done!
 		Integer expectedReverse[] = { 40, 20, 10 };
 		Integer expectedProximity23[] = { 20, 10, 40 }; // sorted per proximity to 23
 		Comparator<Integer> compNatural = Comparator.naturalOrder();
 		numbers.sort(compNatural.reversed());
 		assertArrayEquals(expectedReverse, getArrayFromList(numbers));
-		//numbers.sort(new ProximityNumberComparator(23)); /*TODO rewrite code without any comparator class*/ 
+		numForCheck = 23;
+		numbers.sort((a,b) -> Math.abs(numForCheck-a)-Math.abs(numForCheck-b));
 		assertArrayEquals(expectedProximity23, getArrayFromList(numbers));
 	}
 
 	@Test
 	void removeIfPerformanceTest() {
+		//TODO
+		//Done
 		List<Integer> list = new LinkedList<>();
 		// List<Integer> list = new ArrayList<>();
 		fillListPerformance(list);
-		/*TODO rewrite code without any predicate class*/ 
-		//Predicate<Integer> divider4Predicate = new Devider$Predicate();
-		//list.removeIf(divider4Predicate);/*TODO rewrite code without any predicate class*/ 
+		numForCheck = 4;
+		 list.removeIf(el -> el % numForCheck ==0);
+		 assertEquals(-1, list.indexOf(el -> el % numForCheck ==0));
 
 	}
 
-//DONE!
 	@Test
 	void RemoveByIteratorTest() {
 		Iterator<Integer> numbIterator = numbers.iterator();
@@ -319,22 +338,21 @@ class ListTest<T> {
 			Integer el = numbIterator2.next();
 			if (el.equals(40)) {
 				numbIterator2.remove();
-				}
+			}
 		}
 		assertArrayEquals(exp2, getArrayFromList(numbers));
 	}
-		@Test
-	 void removeAllIteratorTest()
-	{
-		Iterator<Integer>numbIterator = numbers.iterator();
-		while(numbIterator.hasNext())
-		{	
+
+	@Test
+	void removeAllIteratorTest() {
+		Iterator<Integer> numbIterator = numbers.iterator();
+		while (numbIterator.hasNext()) {
 			System.out.println(numbIterator.next());
 			numbIterator.remove();
 		}
 		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
 	}
-	
+
 	private void fillListPerformance(List<Integer> list) {
 		for (int i = 0; i < N_NUMBERS_PERFORMANCE; i++) {
 			list.add((int) (Math.random() * Integer.MAX_VALUE));
