@@ -33,8 +33,8 @@ class ListTest<T> {
 
 	private List<Integer> getInitialNumbers() {
 
-	List<Integer> res = new ArrayList<>(1);
-//	List<Integer> res = new LinkedList<>();
+//	List<Integer> res = new ArrayList<>(1);
+	List<Integer> res = new LinkedList<>();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
@@ -146,8 +146,8 @@ class ListTest<T> {
 
 	@Test
 	void containsPredicateNumbersTest() {
-		Predicate<Integer> predicate100 = new GreaterNumberPredicate(100);
-		Predicate<Integer> predicate25 = new GreaterNumberPredicate(25);
+		Predicate<Integer> predicate100 = null; /*TODO rewrite code without any predicate class*/ 
+		Predicate<Integer> predicate25 = null; /*TODO rewrite code without any predicate class*/ 
 		assertFalse(numbers.contains(predicate100));
 		assertTrue(numbers.contains(predicate25));
 
@@ -155,8 +155,8 @@ class ListTest<T> {
 
 	@Test
 	void containsPredicateStringsTest() {
-		Predicate<String> predicateName = new StartWithPredicate("name");
-		Predicate<String> predicateMain = new StartWithPredicate("main");
+		Predicate<String> predicateName = null; /*TODO rewrite code without any predicate class*/ 
+		Predicate<String> predicateMain = null; /*TODO rewrite code without any predicate class*/ 
 		assertFalse(strings.contains(predicateMain));
 		assertTrue(strings.contains(predicateName));
 
@@ -192,17 +192,18 @@ class ListTest<T> {
 	}
 
 	@Test
-	void indexOfPredicate() {
-		assertEquals(2, numbers.indexOf(new GreaterNumberPredicate(25)));
-		assertEquals(0, numbers.indexOf(new GreaterNumberPredicate(5)));
-		assertEquals(-1, numbers.indexOf(new GreaterNumberPredicate(45)));
+	void indexOfPredicate() {//TODO
+//		assertEquals(2, numbers.indexOf(new GreaterNumberPredicate(25)));/*TODO rewrite code without any predicate class*/ 
+//		assertEquals(0, numbers.indexOf(new GreaterNumberPredicate(5)));/*TODO rewrite code without any predicate class*/ 
+//		assertEquals(-1, numbers.indexOf(new GreaterNumberPredicate(45)));/*TODO rewrite code without any predicate class*/ 
 	}
 
 	@Test
 	void lastIndexOfPredicate() {
-		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(25)));
-		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(5)));
-		assertEquals(-1, numbers.lastIndexOf(new GreaterNumberPredicate(45)));
+		/*TODO rewrite code without any predicate class*/ 
+//		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(25)));
+//		assertEquals(2, numbers.lastIndexOf(new GreaterNumberPredicate(5)));
+//		assertEquals(-1, numbers.lastIndexOf(new GreaterNumberPredicate(45)));
 	}
 
 	@Test
@@ -210,11 +211,11 @@ class ListTest<T> {
 		Integer expected[] = { 10, 20 };
 		Integer expectedEmpty[] = {};
 
-		Predicate<Integer> greater25 = new GreaterNumberPredicate(25);
+		Predicate<Integer> greater25 = null; /*TODO rewrite code without any predicate class*/ 
 		assertTrue(numbers.removeIf(greater25));
 		assertFalse(numbers.removeIf(greater25));
 		assertArrayEquals(expected, getArrayFromList(numbers));
-		assertTrue(numbers.removeIf(new GreaterNumberPredicate(0)));
+		//assertTrue(numbers.removeIf(new GreaterNumberPredicate(0)));/*TODO 0 rewrite code without any predicate class*/ 
 		assertArrayEquals(expectedEmpty, getArrayFromList(numbers));
 
 	}
@@ -283,7 +284,7 @@ class ListTest<T> {
 		Comparator<Integer> compNatural = Comparator.naturalOrder();
 		numbers.sort(compNatural.reversed());
 		assertArrayEquals(expectedReverse, getArrayFromList(numbers));
-		numbers.sort(new ProximityNumberComparator(23));
+		//numbers.sort(new ProximityNumberComparator(23)); /*TODO rewrite code without any comparator class*/ 
 		assertArrayEquals(expectedProximity23, getArrayFromList(numbers));
 	}
 
@@ -292,8 +293,9 @@ class ListTest<T> {
 		List<Integer> list = new LinkedList<>();
 		// List<Integer> list = new ArrayList<>();
 		fillListPerformance(list);
-		Predicate<Integer> divider4Predicate = new Devider$Predicate();
-		list.removeIf(divider4Predicate);
+		/*TODO rewrite code without any predicate class*/ 
+		//Predicate<Integer> divider4Predicate = new Devider$Predicate();
+		//list.removeIf(divider4Predicate);/*TODO rewrite code without any predicate class*/ 
 
 	}
 
