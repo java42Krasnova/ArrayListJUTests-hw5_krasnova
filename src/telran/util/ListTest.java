@@ -327,7 +327,6 @@ class ListTest<T> {
 			numbIterator.remove();
 		}
 		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
-
 	}
 
 	private void fillListPerformance(List<Integer> list) {
