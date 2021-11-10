@@ -23,8 +23,8 @@ class ListTest<T> {
 	}
 
 	private List<String> getInitialStrings() {
-		List<String> res = new ArrayList<>();
-		// List<String> res = new LinkedList<>();
+	//	List<String> res = new ArrayList<>();
+		List<String> res = new LinkedList<>();
 		for (int i = 0; i < initialStrings.length; i++) {
 			res.add(initialStrings[i]);
 		}
@@ -33,8 +33,8 @@ class ListTest<T> {
 
 	private List<Integer> getInitialNumbers() {
 
-		List<Integer> res = new ArrayList<>(1);
-//		 List<Integer> res = new LinkedList<>();
+	//	List<Integer> res = new ArrayList<>(1);
+	List<Integer> res = new LinkedList<>();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
@@ -320,6 +320,13 @@ class ListTest<T> {
 				}
 		}
 		assertArrayEquals(exp2, getArrayFromList(numbers));
+		numbIterator = numbers.iterator();
+		while(numbIterator.hasNext())
+		{	
+			numbIterator.next();
+			numbIterator.remove();
+		}
+		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
 
 	}
 
