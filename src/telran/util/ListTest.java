@@ -33,8 +33,8 @@ class ListTest<T> {
 
 	private List<Integer> getInitialNumbers() {
 
-	//	List<Integer> res = new ArrayList<>(1);
-	List<Integer> res = new LinkedList<>();
+	List<Integer> res = new ArrayList<>(1);
+//	List<Integer> res = new LinkedList<>();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
@@ -323,7 +323,7 @@ class ListTest<T> {
 		numbIterator = numbers.iterator();
 		while(numbIterator.hasNext())
 		{	
-			numbIterator.next();
+			System.out.println(numbIterator.next());
 			numbIterator.remove();
 		}
 		assertArrayEquals(new Integer[0], getArrayFromList(numbers));
