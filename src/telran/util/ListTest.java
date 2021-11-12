@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -149,9 +151,10 @@ class ListTest<T> {
 	// TODO
 	// DONE
 		numForCheck = 100;
-		assertFalse(numbers.contains(el -> el > numForCheck));
+		Predicate<Integer> checkContainsNum = (el -> el > numForCheck);
+		assertFalse(numbers.contains(checkContainsNum));
 		numForCheck = 25;
-		assertTrue(numbers.contains(el -> el > numForCheck));
+		assertTrue(numbers.contains(checkContainsNum));
 
 	}
 
@@ -159,10 +162,11 @@ class ListTest<T> {
 	// TODO
 	// Done
 	void containsPredicateStringsTest() {
+		Predicate<String> checkContainsStr =(str -> str.contains(strForCheck));
 		strForCheck = "main";
-		assertFalse(strings.contains(str -> str.contains(strForCheck)));
+		assertFalse(strings.contains(checkContainsStr));
 		strForCheck = "name";
-		assertTrue(strings.contains(str -> str.contains(strForCheck)));
+		assertTrue(strings.contains(checkContainsStr));
 
 	}
 
@@ -199,24 +203,26 @@ class ListTest<T> {
 	void indexOfPredicate() {
 		// TODO
 		// DONE
+		Predicate<Integer> checkIndexOfNum = (el -> el > numForCheck);
 		numForCheck = 25;
-		assertEquals(2, numbers.indexOf(el -> el > numForCheck));
+		assertEquals(2, numbers.indexOf(checkIndexOfNum));
 		numForCheck = 5;
-		assertEquals(0, numbers.indexOf(el -> el > numForCheck));
+		assertEquals(0, numbers.indexOf(checkIndexOfNum));
 		numForCheck = 45;
-		assertEquals(-1, numbers.indexOf(el -> el > numForCheck));
+		assertEquals(-1, numbers.indexOf(checkIndexOfNum));
 	}
 
 	@Test
 	void lastIndexOfPredicate() {
 		//TODO
 		//DONE
+		Predicate<Integer> checkLastIndexOfNum = (el -> el > numForCheck);
 		numForCheck = 25;
-		assertEquals(2, numbers.lastIndexOf(el -> el > numForCheck));
+		assertEquals(2, numbers.lastIndexOf(checkLastIndexOfNum));
 		numForCheck = 5;
-		assertEquals(2, numbers.lastIndexOf(el -> el > numForCheck));
+		assertEquals(2, numbers.lastIndexOf(checkLastIndexOfNum));
 		numForCheck = 45;
-		assertEquals(-1, numbers.lastIndexOf(el -> el > numForCheck));
+		assertEquals(-1, numbers.lastIndexOf(checkLastIndexOfNum));
 	}
 
 	@Test
@@ -225,12 +231,13 @@ class ListTest<T> {
 		//Done
 		Integer expected[] = { 10, 20 };
 		Integer expectedEmpty[] = {};
+		Predicate<Integer> checkRemuveIfPredicateNum = (el -> el > numForCheck);
 		numForCheck = 25; 
-		assertTrue(numbers.removeIf(el -> el > numForCheck));
-		assertFalse(numbers.removeIf(el -> el > numForCheck));
+		assertTrue(numbers.removeIf(checkRemuveIfPredicateNum));
+		assertFalse(numbers.removeIf(checkRemuveIfPredicateNum));
 		assertArrayEquals(expected, getArrayFromList(numbers));
 		numForCheck = 0;
-		assertTrue(numbers.removeIf(el -> el > numForCheck));
+		assertTrue(numbers.removeIf(checkRemuveIfPredicateNum));
 		assertArrayEquals(expectedEmpty, getArrayFromList(numbers));
 
 	}
@@ -313,9 +320,10 @@ class ListTest<T> {
 		List<Integer> list = new LinkedList<>();
 		// List<Integer> list = new ArrayList<>();
 		fillListPerformance(list);
+		Predicate<Integer> divider4 = (el -> el % numForCheck ==0);
 		numForCheck = 4;
-		 list.removeIf(el -> el % numForCheck ==0);
-		 assertEquals(-1, list.indexOf(el -> el % numForCheck ==0));
+		 list.removeIf(divider4);
+		 assertEquals(-1, list.indexOf(divider4));
 
 	}
 
