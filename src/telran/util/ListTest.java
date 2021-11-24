@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +26,8 @@ class ListTest<T> {
 	}
 
 	private List<String> getInitialStrings() {
-		 List<String> res = new ArrayList<>();
-		//List<String> res = new LinkedList<>();
+		// List<String> res = new ArrayList<>();
+		List<String> res = new LinkedList<>();
 		for (int i = 0; i < initialStrings.length; i++) {
 			res.add(initialStrings[i]);
 		}
@@ -35,8 +36,8 @@ class ListTest<T> {
 
 	private List<Integer> getInitialNumbers() {
 
-		List<Integer> res = new ArrayList<>(1);
-		//List<Integer> res = new LinkedList<>();
+		//List<Integer> res = new ArrayList<>(1);
+		List<Integer> res = new LinkedList<>();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
@@ -148,7 +149,6 @@ class ListTest<T> {
 
 	@Test
 	void containsPredicateNumbersTest() {
-	// TODO
 	// DONE
 		numForCheck = 100;
 		Predicate<Integer> checkContainsNum = (el -> el > numForCheck);
@@ -315,10 +315,9 @@ class ListTest<T> {
 
 	@Test
 	void removeIfPerformanceTest() {
-		//TODO
-		//Done
+		
 		List<Integer> list = new LinkedList<>();
-		// List<Integer> list = new ArrayList<>();
+		//List<Integer> list = new ArrayList<>();
 		fillListPerformance(list);
 		Predicate<Integer> divider4 = (el -> el % numForCheck ==0);
 		numForCheck = 4;
@@ -366,4 +365,46 @@ class ListTest<T> {
 			list.add((int) (Math.random() * Integer.MAX_VALUE));
 		}
 	}
+	@Test
+	void testNextException() {
+		Iterator<Integer> it = numbers.iterator();
+		while(it.hasNext()) {
+			it.next();
+			}
+		try {
+			it.next();
+			fail("There shoud be thrown exception");
+		} catch (NoSuchElementException e) {
+		
+		} catch (Exception e) {
+			fail("There shoud be thrown NoSuchElementException");
+		}
+	}
+	
+	@Test
+	void testREmoveNoNext(){
+		Iterator<Integer> it = numbers.iterator();
+		it.next();
+		it.next();
+		it.remove();
+		exceptionRemoveTest(it);
+		it = numbers.iterator();
+		exceptionRemoveTest(it);
+	}
+
+	private void exceptionRemoveTest(Iterator<Integer> it) {
+		try {
+			it.remove();
+			fail("there should be thrown Exception");
+		} catch (IllegalStateException e) {
+			
+		} catch (Exception e) {
+			fail("there should be thrown illegalStateException ");
+		}		
+	}
+
+
+
+
+	
 }
