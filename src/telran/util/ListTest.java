@@ -2,6 +2,9 @@ package telran.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -14,30 +17,40 @@ class ListTest<T> {
 	static int numForCheck;
 	static String strForCheck;
 	private static final int N_NUMBERS_PERFORMANCE = 100;
+	private static final String BASE_PACKAGE = "telran.util.";
 	private List<Integer> numbers;
 	private List<String> strings;
 	Integer initialNumbers[] = { 10, 20, 40 };
 	String initialStrings[] = { "name1", "name2" };
-
 	@BeforeEach
+	
 	void setUp() throws Exception {
 		numbers = getInitialNumbers();
 		strings = getInitialStrings();
 	}
 
-	private List<String> getInitialStrings() {
-		// List<String> res = new ArrayList<>();
-		List<String> res = new LinkedList<>();
+	private List<String> getInitialStrings() throws Exception {
+		//TODO DONE
+		String className = getClassName();
+		List<String> res  =  (List<String>) Class.forName(className).getConstructor().newInstance();//List<String> res = new LinkedList<>();
 		for (int i = 0; i < initialStrings.length; i++) {
 			res.add(initialStrings[i]);
 		}
 		return res;
 	}
 
-	private List<Integer> getInitialNumbers() {
+	private String getClassName() throws Exception {
+		//TODO DONE
 
-		//List<Integer> res = new ArrayList<>(1);
-		List<Integer> res = new LinkedList<>();
+		File file = new File ("ContainerType.txt");
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		return BASE_PACKAGE + br.readLine();
+	}
+
+	private List<Integer> getInitialNumbers() throws Exception {
+		//TODO DONE
+		String className = getClassName();
+		List<Integer> res  =  (List<Integer>) Class.forName(className).getConstructor().newInstance();
 		for (int num : initialNumbers) {
 			res.add(num);
 		}
