@@ -28,7 +28,7 @@ class ListTest<T> {
 		numbers = getInitialNumbers();
 		strings = getInitialStrings();
 	}
-
+	
 	private List<String> getInitialStrings() throws Exception {
 		//TODO DONE
 		String className = getClassName();
